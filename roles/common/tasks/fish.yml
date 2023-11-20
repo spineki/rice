@@ -18,6 +18,16 @@
     update_cache: true
   become: true
 
+- name: "Creating a config folder for fish"
+  ansible.builtin.file:
+    path: ~/.config/fish
+    state: directory
+
+- name: "Copying fish config to fish config folder"
+  ansible.builtin.copy:
+    src: "fish/config.fish"
+    dest: "/home/$USER/.config/fish/config.fish"
+
 - name: Set fish as default shell
   ansible.builtin.user:
     name: "{{ user_name }}"
