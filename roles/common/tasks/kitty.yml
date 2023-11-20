@@ -1,0 +1,33 @@
+- name: "Installing kitty"
+  ansible.builtin.shell: "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+
+# ln -s ~/.local/kitty.app/bin/kitty ~/. local/bin/
+- name: "Creating symbolic link for kitty executable"
+  file:
+    src: "~/.local/kitty.app/bin/kitty"
+    dest: "~/.local/bin/kitty"
+    state: link
+
+# cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications
+- name: Copy .desktop file
+  ansible.builtin.copy:
+    src: "~/.local/kitty.app/share/applications/kitty.desktop"
+    dest: "~/.local/share/applications"
+
+- name: Copy custom icon for kitty
+  ansible.builtin.copy:
+    src: "kitty/cozy_kitty_256x256.png"
+    dest: "/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png"
+
+- name: "Updating .desktop file to point to correct picture"
+  ansible.builtin.shell: sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
+
+- name: "Creating a config folder for kitty"
+  ansible.builtin.file:
+    path: ~/.config/kitty
+    state: directory
+
+- name: "Copying kitty config to kitty config folder"
+  ansible.builtin.copy:
+    src: "kitty/kitty.config"
+    dest: "/home/$USER/.config/kitty/kitty.conf"

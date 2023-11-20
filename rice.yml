@@ -1,0 +1,9 @@
+- name: Installing necessary component to get a nice linux dev environnement
+  hosts: localhost
+
+  # ask for vars_prompt instead
+  vars_files:
+    - vars/all.yml
+
+  roles:
+    - common

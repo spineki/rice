@@ -1,0 +1,24 @@
+- name: "Showing fish user"
+  ansible.builtin.debug:
+    msg: |
+      Fish will become default shell for user: {{ user_name }}
+      Using path {{ fish_location }}
+
+- name: "Add fish repository Apt signed key"
+  ansible.builtin.apt_repository:
+    repo: "ppa:fish-shell/release-3"
+    state: present
+  become: true
+
+- name: "Installing fish"
+  ansible.builtin.apt:
+    name:
+      - fish
+    state: present
+    update_cache: true
+  become: true
+
+- name: Set fish as default shell
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    shell: "{{ fish_location }}"

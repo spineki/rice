@@ -1,0 +1,5 @@
+- name: "Installing fira code"
+  ansible.builtin.apt:
+    name:
+      - "fonts-firacode"
+    state: present

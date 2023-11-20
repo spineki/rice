@@ -1,0 +1,11 @@
+---
+- name: Update apt cache
+  changed_when: false
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+  tags: always
+
+- ansible.builtin.import_tasks: fonts.yml
+- ansible.builtin.import_tasks: fish.yml
+- ansible.builtin.import_tasks: kitty.yml
