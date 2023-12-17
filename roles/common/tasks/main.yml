@@ -8,7 +8,9 @@
 
 - ansible.builtin.import_tasks: fonts.yml
   tags: fonts
-- ansible.builtin.import_tasks: fish.yml
-  tags: fish
 - ansible.builtin.import_tasks: kitty.yml
   tags: kitty
+- ansible.builtin.import_tasks: fish.yml
+  tags: fish
+- ansible.builtin.import_tasks: starship.yml
+  tags: starship

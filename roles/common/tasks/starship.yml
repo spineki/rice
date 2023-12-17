@@ -1,0 +1,9 @@
+- name: "Installing starship"
+  # -s -- '-y' to automatically answer yes
+  ansible.builtin.shell: "curl -sS https://starship.rs/install.sh | sh -s -- '-y'"
+  become: true
+
+- name: "Copying starship config to starship config folder"
+  ansible.builtin.copy:
+    src: "starship/starship.toml"
+    dest: "/home/$USER/.config/starship.toml"

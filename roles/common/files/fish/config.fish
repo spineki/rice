@@ -45,3 +45,6 @@ set -g fish_color_option
 set -g fish_pager_color_secondary_background 
 set -g fish_pager_color_selected_completion 
 set -g fish_pager_color_selected_description 
+
+# compatibility with starship
+starship init fish | source
