@@ -3,3 +3,20 @@
     name:
       - "fonts-firacode"
     state: present
+
+- name: "Download nerd font symbols"
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.0/FiraCode.zip"
+    dest: "/home/$USER/.local/share/fonts/"
+    remote_src: true
+
+- name: Deleting unwanted files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/home/$USER/.local/share/fonts/LICENSE"
+    - "/home/$USER/.local/share/fonts/README.md"
+
+- name: "Update font cache"
+  ansible.builtin.shell: "fc-cache -fv"
