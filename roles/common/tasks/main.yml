@@ -14,3 +14,5 @@
   tags: fish
 - ansible.builtin.import_tasks: starship.yml
   tags: starship
+- ansible.builtin.import_tasks: hyprland.yml
+  tags: hyprland

@@ -1,0 +1,156 @@
+- name: "Installing Hyprland dependencies"
+  ansible.builtin.apt:
+    name:
+      - meson
+      - wget
+      - build-essential
+      - ninja-build
+      - cmake-extras
+      - cmake
+      - gettext
+      - gettext-base
+      - fontconfig
+      - libfontconfig-dev
+      - libffi-dev
+      - libxml2-dev
+      - libdrm-dev
+      - libxkbcommon-x11-dev
+      - libxkbregistry-dev
+      - libxkbcommon-dev
+      - libpixman-1-dev
+      - libudev-dev
+      - libseat-dev
+      - seatd
+      - libxcb-dri3-dev
+      - libvulkan-dev
+      - libvulkan-volk-dev
+      - vulkan-validationlayers-dev
+      - libvkfft-dev
+      - libgulkan-dev
+      - libegl-dev
+      - libgles2
+      - libegl1-mesa-dev
+      - glslang-tools
+      - libinput-bin
+      - libinput-dev
+      - libxcb-composite0-dev
+      - libavutil-dev
+      - libavcodec-dev
+      - libavformat-dev
+      - libxcb-ewmh2
+      - libxcb-ewmh-dev
+      - libxcb-present-dev
+      - libxcb-icccm4-dev
+      - libxcb-render-util0-dev
+      - libxcb-res0-dev
+      - libxcb-xinput-dev
+      - xdg-desktop-portal-wlr
+      - libsystemd-dev
+      - libwayland-dev
+      - jq
+      - libgbm-dev # check this
+    state: present
+    update_cache: true
+  become: true
+
+# Wayland
+- name: "Cloning Wayland git folder"
+  ansible.builtin.git:
+    repo: "https://gitlab.freedesktop.org/wayland/wayland.git"
+    dest: "/home/$USER/Wayland"
+    version: "1.22.0"
+
+- name: Create Wayland  build folder if it does not exist
+  ansible.builtin.file:
+    path: "/home/$USER/Wayland/build"
+    state: directory
+
+- name: Compiling Wayland with meson
+  ansible.builtin.command: meson setup .. --prefix=/usr --buildtype=release -Ddocumentation=false
+  args:
+    chdir: "/home/$USER/Wayland/build"
+
+- name: Compiling Wayland with ninja
+  ansible.builtin.command: ninja
+  args:
+    chdir: "/home/$USER/Wayland/build"
+
+- name: Installing Wayland with ninja
+  ansible.builtin.command: sudo ninja install
+  args:
+    chdir: "/home/$USER/Wayland/build"
+
+# WaylandProtocol
+- name: "Cloning Wayland Protocol git folder"
+  ansible.builtin.git:
+    repo: "https://gitlab.freedesktop.org/wayland/wayland-protocols.git"
+    dest: "/home/$USER/WaylandProtocol"
+    version: "1.32"
+
+- name: Create Wayland Protocol build folder if it does not exist
+  ansible.builtin.file:
+    path: "/home/$USER/WaylandProtocol/build"
+    state: directory
+
+- name: Compiling Wayland Protocols with meson
+  ansible.builtin.command: meson setup --prefix=/usr --buildtype=release
+  args:
+    chdir: "/home/$USER/WaylandProtocol/build"
+
+- name: Compiling Wayland Protocols with ninja
+  ansible.builtin.command: ninja
+  args:
+    chdir: "/home/$USER/WaylandProtocol/build"
+
+- name: Installing Wayland Protocols with ninja
+  ansible.builtin.command: sudo ninja install
+  args:
+    chdir: "/home/$USER/WaylandProtocol/build"
+
+# LibDisplayInfo
+- name: "Cloning LibDisplayInfo git folder"
+  ansible.builtin.git:
+    repo: "https://gitlab.freedesktop.org/emersion/libdisplay-info.git"
+    dest: "/home/$USER/LibDisplayInfo"
+    version: "0.1.1"
+
+- name: Create LibDisplayInfo build folder if it does not exist
+  ansible.builtin.file:
+    path: "/home/$USER/LibDisplayInfo/build"
+    state: directory
+
+- name: Compiling LibDisplayInfos with meson
+  ansible.builtin.command: meson setup --prefix=/usr --buildtype=release
+  args:
+    chdir: "/home/$USER/LibDisplayInfo/build"
+
+- name: Compiling Meson Protocols with ninja
+  ansible.builtin.command: ninja
+  args:
+    chdir: "/home/$USER/LibDisplayInfo/build"
+
+- name: Installing Meson Protocols with ninja
+  ansible.builtin.command: sudo ninja install
+  args:
+    chdir: "/home/$USER/LibDisplayInfo/build"
+
+# HyprLand
+- name: "Cloning Hyprland git folder"
+  ansible.builtin.git:
+    repo: "https://github.com/hyprwm/Hyprland.git"
+    dest: "/home/$USER/Hyprland"
+    recursive: true
+    #"v0.33.1" fails due to libdrm 2.4.118 min required...
+    # version: "v0.32.0" fails due to missing <format> header
+    version: "v0.24.1"
+
+# become: true
+- name: "Building Hyprland from sources"
+  make:
+    chdir: "/home/$USER/Hyprland"
+    target: all
+
+- name: Installing Hyprland
+  ansible.builtin.command: sudo make install
+  args:
+    chdir: "/home/$USER/Hyprland"
