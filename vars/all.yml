@@ -1,3 +1,4 @@
 ---
 user_name: spineki
 fish_location: /usr/bin/fish
+pictures_folder: /home/$USER/Images

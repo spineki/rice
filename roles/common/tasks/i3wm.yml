@@ -1,0 +1,27 @@
+# I3 is Window Manager that provides a tiling system. You can access it in you login page by clicking on a gear icon
+
+- name: "Installing feh (wallpaper)"
+  ansible.builtin.apt:
+    name:
+      - feh
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Copying wallpaper to pictures folder"
+  ansible.builtin.copy:
+    src: "i3wm/wallpaper.png"
+    dest: "{{ pictures_folder }}/wallpaper.png"
+
+- name: "Installing I3wm"
+  ansible.builtin.apt:
+    name:
+      - i3
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Copying i3wm config to i3w config folder"
+  ansible.builtin.copy:
+    src: "i3wm/config"
+    dest: "/home/$USER/.config/i3/config"
