@@ -1,0 +1,22 @@
+- name: "Installing rofi (app launcher)"
+  ansible.builtin.apt:
+    name:
+      - rofi
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Creating a config folder for rofi"
+  ansible.builtin.file:
+    path: ~/.config/rofi
+    state: directory
+
+- name: "Copying rofi config to rofi config folder"
+  ansible.builtin.copy:
+    src: "rofi/config.rasi"
+    dest: "/home/$USER/.config/rofi/config.rasi"
+
+- name: "Copying rofi config to rofi config folder"
+  ansible.builtin.copy:
+    src: "rofi/custom.rasi"
+    dest: "/home/$USER/.config/rofi/custom.rasi"

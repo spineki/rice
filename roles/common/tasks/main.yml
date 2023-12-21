@@ -15,4 +15,14 @@
 - ansible.builtin.import_tasks: starship.yml
   tags: starship
 - ansible.builtin.import_tasks: i3wm.yml
-  tags: i3wm
+  tags:
+    - i3wm
+    - ricing
+- ansible.builtin.import_tasks: rofi.yml
+  tags:
+    - rofi
+    - ricing
+- ansible.builtin.import_tasks: picom.yml
+  tags:
+    - picom
+    - ricing

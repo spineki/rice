@@ -1,0 +1,17 @@
+- name: "Installing picom (app launcher)"
+  ansible.builtin.apt:
+    name:
+      - picom
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Creating a config folder for picom"
+  ansible.builtin.file:
+    path: ~/.config/picom
+    state: directory
+
+- name: "Copying picom config to picom config folder"
+  ansible.builtin.copy:
+    src: "picom/picom.conf"
+    dest: "/home/$USER/.config/picom/picom.conf"
