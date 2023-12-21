@@ -196,6 +196,8 @@ bar {
 default_border none
 default_floating_border 1pixel
 hide_edge_borders both
+# todo: uncomment this when the rounded-corner pr is merged. 
+# border_radius 8px
 
 # gaps
 gaps inner 16px
