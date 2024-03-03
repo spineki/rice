@@ -3,6 +3,12 @@
     name:
       - "fonts-firacode"
     state: present
+  become: true
+
+- name: "Ensure font folder exits"
+  ansible.builtin.file:
+    path: "/home/$USER/.local/share/fonts/"
+    state: "directory"
 
 - name: "Download nerd font symbols"
   ansible.builtin.unarchive:
