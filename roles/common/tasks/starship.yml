@@ -1,3 +1,11 @@
+- name: "Installing curl"
+  ansible.builtin.apt:
+    name:
+      - curl
+    state: present
+    update_cache: true
+  become: true
+
 - name: "Installing starship"
   # -s -- '-y' to automatically answer yes
   ansible.builtin.shell: "curl -sS https://starship.rs/install.sh | sh -s -- '-y'"
