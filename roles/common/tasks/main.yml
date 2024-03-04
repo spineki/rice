@@ -8,6 +8,8 @@
 
 - ansible.builtin.import_tasks: fonts.yml
   tags: fonts
+- ansible.builtin.import_tasks: vscode.yml
+  tags: vscode
 - ansible.builtin.import_tasks: kitty.yml
   tags: kitty
 - ansible.builtin.import_tasks: fish.yml

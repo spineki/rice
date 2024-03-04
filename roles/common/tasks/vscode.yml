@@ -1,0 +1,35 @@
+- name: "Install vscode" 
+  community.general.snap:
+    name: "code"
+    state: "present"
+    classic: true
+    channel: "stable"
+    
+- name: "Install extension: Git Graph"
+  ansible.builtin.shell: "code --install-extension mhutchie.git-graph"
+
+- name: "Install extension: Dracula"
+  ansible.builtin.shell: "code --install-extension dracula-theme.theme-dracula"
+
+- name: "Install extension: Better comments"
+  ansible.builtin.shell: "code --install-extension aaron-bond.better-comments"
+
+- name: "Install extension: Rust Analyzer"
+  ansible.builtin.shell: "code --install-extension rust-lang.rust-analyzer"
+
+- name: "Install extension: Git Lens"
+  ansible.builtin.shell: "code --install-extension eamodio.gitlens"
+
+- name: "Install extension: Python"
+  ansible.builtin.shell: "code --install-extension ms-python.python"
+
+- name: "Install extension: Live Share"
+  ansible.builtin.shell: "code --install-extension MS-vsliveshare.vsliveshare"
+
+- name: "Copying vscode setting.json to vscode config folder"
+  ansible.builtin.copy:
+    src: "vscode/settings.json"
+    dest: "/home/$USER/.config/Code/User/settings.json"
+
+  
+
