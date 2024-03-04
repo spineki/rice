@@ -1,0 +1,14 @@
+[legacy/profiles:]
+default='94f5c630-4b00-43a4-85b7-afa35eba2cb1'
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9', '94f5c630-4b00-43a4-85b7-afa35eba2cb1']
+
+[legacy/profiles:/:94f5c630-4b00-43a4-85b7-afa35eba2cb1]
+background-color='rgb(40,42,54)'
+bold-color='rgb(110,70,164)'
+bold-color-same-as-fg=false
+font='FiraCode Nerd Font 12'
+foreground-color='rgb(248,248,242)'
+palette=['rgb(38,38,38)', 'rgb(227,86,167)', 'rgb(66,230,108)', 'rgb(155,107,223)', 'rgb(230,71,71)', 'rgb(117,215,236)', 'rgb(117,215,236)', 'rgb(239,165,84)', 'rgb(122,122,122)', 'rgb(255,121,198)', 'rgb(80,250,123)', 'rgb(241,250,140)', 'rgb(189,147,249)', 'rgb(255,85,85)', 'rgb(139,233,253)', 'rgb(255,184,108)']
+use-system-font=false
+use-theme-colors=false
+visible-name='Dracula'

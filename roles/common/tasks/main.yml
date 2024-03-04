@@ -10,6 +10,8 @@
   tags: fonts
 - ansible.builtin.import_tasks: vscode.yml
   tags: vscode
+- ansible.builtin.import_tasks: gnome-terminal.yml
+  tags: gnome-terminal
 - ansible.builtin.import_tasks: kitty.yml
   tags: kitty
 - ansible.builtin.import_tasks: fish.yml

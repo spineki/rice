@@ -36,4 +36,7 @@
 - name: "Install extension: Live Share"
   ansible.builtin.shell: "code --install-extension MS-vsliveshare.vsliveshare"
 
+- name: "Install extension: Ansible"
+  ansible.builtin.shell: "code --install-extension redhat.ansible"
+
 

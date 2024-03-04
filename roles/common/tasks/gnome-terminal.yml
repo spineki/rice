@@ -1,0 +1,15 @@
+# - name: "Load gnome-terminal profile"
+#   dconf:
+#     key: "/org/gnome/terminal"
+#     state: "present"
+#     value: "{{ lookup('ansible.builtin.file', 'gnome-terminal/settings.txt') }}"
+
+- name: "Load gnome-terminal profile"
+  ansible.builtin.shell: "ls"
+  args:
+    chdir: roles/common/files
+
+- name: "Load gnome-terminal profile"
+  ansible.builtin.shell: "dconf load /org/gnome/terminal/ < gnome-terminal/settings.txt"
+  args:
+    chdir: roles/common/files
